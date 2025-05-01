@@ -65,6 +65,13 @@ N.B - These models will be updated later to cater for future stories, but this w
 
 #### Project Initialisation and "Hello World" Tests
 
+-   running PHP v8.4 & NodeJS v20.11.0
+-   Laravel/Breeze is a basic auth 'stater kit' (incl. Livewire + Tailwind), which will be useful later
+
 ```
 $ composer create-project laravel/laravel .
+$ npm i
+$ composer require laravel/breeze --dev
+$ php artisan breeze:install
+$ herd open
 ```
