@@ -37,7 +37,7 @@ Goal of this section is to outline my thought process and justify any decisions 
 -   Don't want to over-engineer, focus on simplicity and code cleanliness.
 -   Few options for technologies. Decided upon Laravel for backend (M+C), and Livewire for frontend (V). Primarily due to experience and knowledge that Laravel would deliver what was required easily. Less experienced with Livewire, but after reading documentation and its close-integration with Laravel, felt like a natural fit and an excuse to learn something a little newer.
 -   Considered options, decided upon using SQLite for DB. Light-weight, simple, scalable. Perfect for a project of this size.
--   In the interest of being data-driven, designed the core ShoppingListItem model first:
+-   In the interest of being data-driven, designed the core data-models first:
 
 #### Data Models
 
