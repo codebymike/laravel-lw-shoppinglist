@@ -61,12 +61,12 @@ qty
 is_active
 (timestamps)
 
-N.B - These models will be updated later to cater for future stories, but this will accomplish the initial functionality.
+-   These models will be updated later to cater for future stories, but this will accomplish the initial functionality.
 
 #### Project Initialisation and "Hello World" Tests
 
 -   running PHP v8.4 & NodeJS v20.11.0
--   Laravel/Breeze is a basic auth 'stater kit' (incl. Livewire + Tailwind), which will be useful later
+-   Laravel/Breeze is a basic auth 'starter kit' (incl. Livewire + Tailwind), which will be useful later
 
 ```
 $ composer create-project laravel/laravel .
@@ -78,7 +78,7 @@ $ herd open
 
 #### First Models + Migrations
 
--   wanted to call the model List, but it's reserved by PHP
+-   wanted to call the model a more generic 'List', but it's reserved by PHP
 
 ```
 $ php artisan make:model ShoppingList -m
