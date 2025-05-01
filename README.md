@@ -75,3 +75,10 @@ $ composer require laravel/breeze --dev
 $ php artisan breeze:install
 $ herd open
 ```
+
+#### First Models + Migrations
+
+```
+$ php artisan make:model ShoppingList -m
+$ php artisan make:model ListItem -m
+```
