@@ -78,7 +78,12 @@ $ herd open
 
 #### First Models + Migrations
 
+-   wanted to call the model List, but it's reserved by PHP
+
 ```
 $ php artisan make:model ShoppingList -m
 $ php artisan make:model ListItem -m
+$ php artisan migrate
 ```
+
+-   Considered pausing here to make model factories & seeders, decided to revist later once ready for more comprehensive testing
