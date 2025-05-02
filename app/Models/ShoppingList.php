@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class ShoppingList extends Model
 {
     //
-
     public $guarded = [];
+
+    public function items()
+    {
+        return $this->hasMany(ListItem::class);
+    }
 }

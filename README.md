@@ -91,7 +91,7 @@ $ php artisan db:seed
 -   This will seed you a test user profile (test@example.com / password)
 -   Considered pausing here to make model factories & seeders, decided to revist later once ready for more comprehensive testing
 
-### First Frontend component (using Livewire / Volt)
+#### First Frontend component (using Livewire / Volt)
 
 ```
 $ php artisan make:volt
@@ -105,3 +105,8 @@ $ php artisan make:controller ShoppingListController --resource
 ```
 
 -   Most of these resource methods will be removed once I know they're not needed
+-   Added routing / controller::show / template
+
+#### (Stories 1 + 2) Show List of Items & Ability to Add
+
+-   Added ShoppingList volt component for listing + added items to the current list
