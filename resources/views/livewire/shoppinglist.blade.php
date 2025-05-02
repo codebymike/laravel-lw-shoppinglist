@@ -21,6 +21,11 @@ $remove = function ( ListItem $item ) {
     $item->delete();
 };
 
+$toggleActive = function ( ListItem $item ) {
+    $item->is_active = !$item->is_active;
+    $item->save();
+};
+
 ?>
 
 <div>
@@ -31,10 +36,13 @@ $remove = function ( ListItem $item ) {
     <div>
         @foreach($list->items as $item)
             <div class="flex justify-between items-center border-b border-gray-300 py-2">
-                <span class="text-lg">
+                <button wire:click="toggleActive({{ $item->id }})">
+                    {{ $item->is_active ? '✅' : '☑️' }}
+                </button>
+                <span class="text-lg {{ !$item->is_active ? 'line-through' : '' }}">
                     {{ $item->title }}
-                    <button wire:click="remove({{ $item->id }})">❌</button>
                 </span>
+                <button wire:click="remove({{ $item->id }})">❌</button>
             </div>
         @endforeach
     </div>

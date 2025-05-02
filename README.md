@@ -114,3 +114,8 @@ $ php artisan make:controller ShoppingListController --resource
 #### (Story 3) Remove Item from List
 
 -   Updated ShoppingList component with remove functionality (TODO? Add confirmation check)
+
+#### (Story 4) Cross Item off List
+
+-   Updated ShoppingList component with ability to change item 'is_active' flag, and to display that in the list
+-   TODO: Fix button placements
