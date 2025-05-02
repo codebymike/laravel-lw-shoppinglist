@@ -119,3 +119,7 @@ $ php artisan make:controller ShoppingListController --resource
 
 -   Updated ShoppingList component with ability to change item 'is_active' flag, and to display that in the list
 -   TODO: Fix button placements
+
+#### (Story 5) Persist List
+
+-   Already accomplished as part of initial list set up
