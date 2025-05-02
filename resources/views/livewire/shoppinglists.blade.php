@@ -28,7 +28,11 @@ $add = function () {
     <div>
         @foreach($lists as $list)
             <div class="flex justify-between items-center border-b border-gray-300 py-2">
-                <span class="text-lg">{{ $list->title }}</span>
+                <span class="text-lg">
+                    <a href="/list/{{ $list->id }}">
+                        {{ $list->title }}
+                    </a>
+                </span>
             </div>
         @endforeach
     </div>

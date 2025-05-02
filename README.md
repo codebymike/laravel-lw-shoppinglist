@@ -98,3 +98,10 @@ $ php artisan make:volt
 ```
 
 -   Created component functionality for adding a shopping list, tying it to the user - then listing out their shopping lists
+-   Going to use basic routing for simplity
+
+```
+$ php artisan make:controller ShoppingListController --resource
+```
+
+-   Most of these resource methods will be removed once I know they're not needed
