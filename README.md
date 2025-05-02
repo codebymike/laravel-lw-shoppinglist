@@ -96,3 +96,5 @@ $ php artisan db:seed
 ```
 $ php artisan make:volt
 ```
+
+-   Created component functionality for adding a shopping list, tying it to the user - then listing out their shopping lists
