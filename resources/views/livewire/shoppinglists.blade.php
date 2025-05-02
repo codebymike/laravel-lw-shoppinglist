@@ -2,7 +2,7 @@
 
 use function Livewire\Volt\{state};
 
-//
+state(['list'])
 
 ?>
 
