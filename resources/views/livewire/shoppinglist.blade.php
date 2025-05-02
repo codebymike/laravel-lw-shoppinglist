@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ListItem;
 use function Livewire\Volt\{state};
 
 state(['list','item']);
@@ -16,6 +17,10 @@ $add = function () {
     $this->item = '';
 };
 
+$remove = function ( ListItem $item ) {
+    $item->delete();
+};
+
 ?>
 
 <div>
@@ -28,6 +33,7 @@ $add = function () {
             <div class="flex justify-between items-center border-b border-gray-300 py-2">
                 <span class="text-lg">
                     {{ $item->title }}
+                    <button wire:click="remove({{ $item->id }})">❌</button>
                 </span>
             </div>
         @endforeach

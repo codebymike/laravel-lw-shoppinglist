@@ -110,3 +110,7 @@ $ php artisan make:controller ShoppingListController --resource
 #### (Stories 1 + 2) Show List of Items & Ability to Add
 
 -   Added ShoppingList volt component for listing + added items to the current list
+
+#### (Story 3) Remove Item from List
+
+-   Updated ShoppingList component with remove functionality (TODO? Add confirmation check)

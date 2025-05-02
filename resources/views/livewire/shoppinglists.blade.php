@@ -1,6 +1,6 @@
 <?php
-use function Livewire\Volt\{state, with};
 
+use function Livewire\Volt\{state, with};
 
 state(['list']);
 
