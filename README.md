@@ -113,7 +113,8 @@ $ php artisan make:controller ShoppingListController --resource
 
 #### (Story 3) Remove Item from List
 
--   Updated ShoppingList component with remove functionality (TODO? Add confirmation check)
+-   Updated ShoppingList component with remove functionality
+-   TODO: Add confirmation check?
 
 #### (Story 4) Cross Item off List
 
@@ -123,3 +124,9 @@ $ php artisan make:controller ShoppingListController --resource
 #### (Story 5) Persist List
 
 -   Already accomplished as part of initial list set up
+
+#### (Story 6) Re-order Items on List
+
+-   There's a number of ways to acccomplish this: numerical order updates, up/down buttons on each item - however standard UX expectations would strongly push towards 'drag & drop'
+-   Accessability benefits: intuitative, easy to perform on mobile devices. Costs: hard for someone with poor vision, accuracy or motor-skills
+-   Ideally would offer a less interactive fall-back option.
