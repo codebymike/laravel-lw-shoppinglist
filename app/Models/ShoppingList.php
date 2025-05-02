@@ -7,4 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class ShoppingList extends Model
 {
     //
+
+    public $guarded = [];
 }
