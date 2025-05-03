@@ -1,9 +1,14 @@
 <?php
 
 use App\Models\ListItem;
-use function Livewire\Volt\{state};
+use function Livewire\Volt\{state, computed};
 
 state(['list','item','price' => 0]);
+
+$total = computed(function () {
+    // return $this->list->items()->where('is_active', true)->sum('price');
+    return $this->list->items()->sum('price');
+});
 
 $add = function () {
 
@@ -62,6 +67,9 @@ $updateListOrder = function ( array $items ) {
                 <button wire:click="remove({{ $item->id }})">❌</button>
             </div>
         @endforeach
+    </div>
+    <div class="flex justify-center items-center border-b border-gray-300 py-2">
+        Shopping List Total: £{{ $this->total }}
     </div>
     <style type="text/css">
         .draggable-source--is-dragging{

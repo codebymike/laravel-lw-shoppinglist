@@ -151,6 +151,7 @@ $ php artisan migrate
 #### (Story 7) Total Prices
 
 -   Added price field to ListItem model
+-   Assumption: Currency is in GDP
 
 ```
 $ php artisan make:migration add_price_to_list_items_table
@@ -159,3 +160,4 @@ $ php artisan migrate
 
 -   Added price state to ListItem component model + view
 -   Validate price using a mix of HTML5 input validation & Laravels form validation rules
+-   Assumption: total price should include all items, active and inactive
