@@ -127,6 +127,20 @@ $ php artisan make:controller ShoppingListController --resource
 
 #### (Story 6) Re-order Items on List
 
--   There's a number of ways to acccomplish this: numerical order updates, up/down buttons on each item - however standard UX expectations would strongly push towards 'drag & drop'
--   Accessability benefits: intuitative, easy to perform on mobile devices. Costs: hard for someone with poor vision, accuracy or motor-skills
+-   There's a number of ways to accomplish this: numerical order updates, up/down buttons on each item. However standard UX expectations would strongly push towards a 'drag & drop' interface.
+-   Accessibility benefits: intuitive, easy to perform on mobile devices. Costs: hard for someone with poor vision, accuracy or motor-skills
 -   Ideally would offer a less interactive fall-back option.
+-   Livewire has an officially supported 'Sortable' plugin which should make the implementation of this functionality trivial
+-   Added the ext. hosted JS file script tag only the required template, avoiding including it in unnecessary requests. Also added the 'defer' tag to prevent it blocking page load, and instructing it to only be run once the page has finished loading.
+-   Created a migration to add 'order' integer field to the ListItem model
+-   Make decision to handle item sorting by: defaulting each item's 'order' to 0, an 'unsorted' list will then default to being rendered in 'created_by' order
+    -   When a user action is taken to sort a list, only then will each item on that list be given the new order - which will be updated on each subsequence re-order
+    -   This will avoid uncessary order increament calculations when adding a new item to a list
+    -   Assumption: adding an item to a list will occur more frequently than ordering a list.
+
+```
+$ php artisan make:migration add_order_to_list_items_table
+```
+
+-   Added 'sortedItems' method to ListItem model to specify the correct order precedence for loading of a list's items
+-   Wrote the function for updating the list items once the order has been updated

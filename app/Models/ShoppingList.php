@@ -13,4 +13,9 @@ class ShoppingList extends Model
     {
         return $this->hasMany(ListItem::class);
     }
+
+    public function sortedItems()
+    {
+        return $this->items()->orderBy('order', 'asc')->orderBy('created_at', 'desc');
+    }
 }

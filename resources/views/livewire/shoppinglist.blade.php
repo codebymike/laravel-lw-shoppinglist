@@ -5,6 +5,10 @@ use function Livewire\Volt\{state};
 
 state(['list','item']);
 
+// $sortedItems = function () {
+    // return $this->list->items()->)->get();
+// };
+
 $add = function () {
     $this->validate([
         'item' => 'required|string|max:255',
@@ -26,6 +30,15 @@ $toggleActive = function ( ListItem $item ) {
     $item->save();
 };
 
+$updateListOrder = function ( array $items ) {
+    foreach ($items as $item) {
+        ListItem::whereId($item['value'])->update(['order' => $item['order']]);
+    }
+};
+
+// how do I sort the order of the items in $list->items? when $list->items is in a laravel volt component?
+// $sortedItems = $list->items()->orderBy('order')->get()
+
 ?>
 
 <div>
@@ -33,9 +46,9 @@ $toggleActive = function ( ListItem $item ) {
         <input type="text" wire:model="item" placeholder="Item Name" class="border border-gray-300 rounded-md p-2 text-slate-700">
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Add Item</button>
     </form>
-    <div>
-        @foreach($list->items as $item)
-            <div class="flex justify-between items-center border-b border-gray-300 py-2">
+    <div wire:sortable="updateListOrder">
+        @foreach($list->sortedItems()->get() as $item)
+            <div class="flex justify-between items-center border-b border-gray-300 py-2" wire:sortable.item="{{ $item->id }}" wire:sortable.handle>
                 <button wire:click="toggleActive({{ $item->id }})">
                     {{ $item->is_active ? '✅' : '☑️' }}
                 </button>

@@ -14,4 +14,5 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/gh/livewire/sortable@v1.x.x/dist/livewire-sortable.js" defer></script>
 </x-app-layout>
