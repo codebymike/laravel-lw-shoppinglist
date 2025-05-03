@@ -13,6 +13,8 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::get('/list/{shoppingList}', [ShoppingListController::class, 'show']);
+Route::get('/list/{shoppingList}', [ShoppingListController::class, 'show'])
+    ->middleware(['auth'])
+    ->name('list.show');
 
 require __DIR__.'/auth.php';
