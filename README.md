@@ -161,3 +161,8 @@ $ php artisan migrate
 -   Added price state to ListItem component model + view
 -   Validate price using a mix of HTML5 input validation & Laravels form validation rules
 -   Assumption: total price should include all items, active and inactive
+
+UI + Tests
+Validation + errors for all current fields
+Fix Lists/List UI
+Tests for all Volt components
