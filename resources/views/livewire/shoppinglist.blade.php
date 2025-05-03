@@ -59,4 +59,13 @@ $updateListOrder = function ( array $items ) {
             </div>
         @endforeach
     </div>
+    <style type="text/css">
+        .draggable-source--is-dragging{
+            background-color: #999;
+            opacity: 0.9;
+        }
+        .draggable-mirror{
+            display: none;
+        }
+    </style>
 </div>

@@ -144,3 +144,5 @@ $ php artisan make:migration add_order_to_list_items_table
 
 -   Added 'sortedItems' method to ListItem model to specify the correct order precedence for loading of a list's items
 -   Wrote the function for updating the list items once the order has been updated
+-   Added better styling to make the dragged element clearer
+-   TODO: Make this visually cleaner
