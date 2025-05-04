@@ -20,18 +20,30 @@ $add = function () {
 
 ?>
 
-<div>
-    <form wire:submit="add">
-        <input type="text" wire:model="list" placeholder="Shopping List Name" class="border border-gray-300 rounded-md p-2 text-slate-700">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Create List</button>
-    </form>
-    <div>
+<div class="max-w-[500px] mx-auto p-4">
+
+    <h1 class="text-2xl font-bold mb-4">Shopping Lists</h1>
+    <p class="mb-4">Create and manage your shopping lists.</p>
+
+    <div class="mb-4 justify-center items-center ">
+        <form wire:submit="add">
+            <input type="text" wire:model="list" placeholder="Shopping List Name" class="border border-gray-300 rounded-md p-2 text-slate-700">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Create New List</button>
+        </form>
+    </div>
+
+    <div class="mt-10">
         @foreach($lists as $list)
-            <div class="flex justify-between items-center border-b border-gray-300 py-2">
-                <span class="text-lg">
-                    <a href="/list/{{ $list->id }}">
-                        {{ $list->title }}
+            <div class="flex justify-between items-center border-b border-gray-300 py-4">
+                <div>
+                    {{ $list->title }}
+                </div>
+                <div>
+                    <a href="/list/{{ $list->id }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        View List
                     </a>
+                </div>
+                    
                 </span>
             </div>
         @endforeach
