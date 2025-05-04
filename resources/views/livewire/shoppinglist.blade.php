@@ -12,14 +12,13 @@ $total = computed(function () {
 
 $add = function () {
 
-    // coerce the price to a decimal
-    if( is_numeric($this->price) && !is_float($this->price) ) {
-        $this->price = number_format((float) $this->price, 2, '.', '');
+    // laraval validation for prices is tricky, so doing it manually feels safer
+    if (empty($this->price) || intval($this->price) < 0 || intval($this->price) >= PHP_INT_MAX) {
+        $this->price = "0.00";
     }
 
     $this->validate([
         'item' => 'required|string|max:255',
-        'price' => 'decimal:2|min:0',
     ]);
 
     $this->list->items()->create([
@@ -28,11 +27,12 @@ $add = function () {
     ]);
 
     $this->item = '';
-    $this->price = 0;
+    $this->price = '';
 };
 
 $remove = function ( ListItem $item ) {
     $item->delete();
+    session()->flash('message', 'Item removed from list.');
 };
 
 $toggleActive = function ( ListItem $item ) {
@@ -58,6 +58,10 @@ $updateListOrder = function ( array $items ) {
             <input wire:model="item" type="text" placeholder="Item Name" class="border border-gray-300 rounded-md p-2 text-slate-700">
             <input wire:model="price" type="number" step="any" placeholder="Item Price" class="border border-gray-300 rounded-md p-2 text-slate-700">
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Add Item</button>
+            <div>
+                @error('item') <span class="block text-red-700 bg-pink-200 text-center">{{ $message }}</span> @enderror 
+                @error('price') <span class="block text-red-700 bg-pink-200 text-center">{{ $message }}</span> @enderror 
+            </div>
         </form>
     </div>
     <div wire:sortable="updateListOrder">

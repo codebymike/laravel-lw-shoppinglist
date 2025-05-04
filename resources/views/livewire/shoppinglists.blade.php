@@ -29,6 +29,9 @@ $add = function () {
         <form wire:submit="add">
             <input type="text" wire:model="list" placeholder="Shopping List Name" class="border border-gray-300 rounded-md p-2 text-slate-700">
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Create New List</button>
+            <div>
+                @error('list') <span class="block text-red-700 bg-pink-200 text-center">{{ $message }}</span> @enderror 
+            </div>
         </form>
     </div>
 
