@@ -27,8 +27,8 @@ $addShoppingList = function () {
 
     <div class="mb-4 justify-center items-center ">
         <form wire:submit="addShoppingList">
-            <input type="text" wire:model="list_title" placeholder="Shopping List Name" class="border border-gray-300 rounded-md p-2 text-slate-700">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Create New List</button>
+            <input type="text" wire:model="list_title" placeholder="Shopping List Name" class="border border-gray-300 rounded-md p-2 text-slate-700" aria-label="Shopping List Name" />
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit" aria-label="Create New List">Create New List</button>
             <div>
                 @error('list') <span class="block text-red-700 bg-pink-200 text-center">{{ $message }}</span> @enderror 
             </div>
@@ -42,7 +42,7 @@ $addShoppingList = function () {
                     {{ $list->title }}
                 </div>
                 <div>
-                    <a href="/list/{{ $list->id }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <a href="/list/{{ $list->id }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" aria-label="View List">
                         View List
                     </a>
                 </div>

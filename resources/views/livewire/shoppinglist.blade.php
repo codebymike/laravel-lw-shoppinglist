@@ -56,9 +56,9 @@ $updateListOrder = function ( array $items ) {
 
     <div class="mb-4 justify-center items-center ">
         <form wire:submit="addListItem">
-            <input wire:model="item_title" type="text" placeholder="Item Name" class="border border-gray-300 rounded-md p-2 text-slate-700">
-            <input wire:model="item_price" type="number" step="any" placeholder="Item Price" class="border border-gray-300 rounded-md p-2 text-slate-700">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Add Item</button>
+            <input wire:model="item_title" type="text" placeholder="Item Name" class="border border-gray-300 rounded-md p-2 text-slate-700" aria-label="List Item Name" />
+            <input wire:model="item_price" type="number" step="any" placeholder="Item Price" class="border border-gray-300 rounded-md p-2 text-slate-700" aria-label="List Item Price" />
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit" aria-label="Add Item to List">Add Item</button>
             <div>
                 @error('item_title') <span class="block text-red-700 bg-pink-200 text-center">{{ $message }}</span> @enderror 
                 @error('item_price') <span class="block text-red-700 bg-pink-200 text-center">{{ $message }}</span> @enderror 
@@ -69,12 +69,12 @@ $updateListOrder = function ( array $items ) {
         @foreach($list->sortedItems()->get() as $item)
             <div class="flex justify-between items-center border rounded-md border-gray-300 p-2 mb-1" wire:sortable.item="{{ $item->id }}">
 
-                <div class="cursor-pointer" wire:sortable.handle>
+                <div class="cursor-pointer" wire:sortable.handle aria-label="Drag Item">
                     <span class="cursor-move">☰</span>
                 </div>
 
-                <button wire:click="toggleActive({{ $item->id }})" class="">
-                    {{ $item->is_active ? '⬜️' : '✅' }}
+                <button wire:click="toggleActive({{ $item->id }})" class="" aria-label="Toggle Item Checked">
+                    {{ $item->is_active ? '✅' : '⬜️' }}
                 </button>
 
                 <div class="text-lg w-[13rem] {{ !$item->is_active ? 'line-through' : '' }}">
@@ -88,7 +88,7 @@ $updateListOrder = function ( array $items ) {
                     </div>
                 </div>
                 
-                <button class="" wire:click="removeListItem({{ $item->id }})">❌</button>
+                <button class="" wire:click="removeListItem({{ $item->id }})" aria-label="Remove Item from List">❌</button>
             </div>
         @endforeach
     </div>
