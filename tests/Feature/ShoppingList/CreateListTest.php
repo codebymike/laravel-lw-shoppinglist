@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\ShoppingLists;
+namespace Tests\Feature\ShoppingList;
 
 use App\Models\User;
 use Livewire\Volt\Volt;
