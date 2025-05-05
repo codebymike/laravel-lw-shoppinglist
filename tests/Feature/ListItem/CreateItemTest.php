@@ -104,3 +104,45 @@ test('ListItem can be marked as completed or in-active', function () {
         'is_active' => 0,
     ]);
 });
+
+test('ListItems can be re-ordered', function () {
+    $this->actingAs($user = User::factory()->create());
+
+    // Create a new shopping list first
+    $shoppingList = ShoppingList::factory()->create([
+        'user_id' => $user->id,
+    ]);
+
+    // Create new list items
+    $listItem1 = $shoppingList->items()->create([
+        'title' => 'Item 1',
+        'price' => '10',
+        'order' => 1,
+    ]);
+
+    $listItem2 = $shoppingList->items()->create([
+        'title' => 'Item 2',
+        'price' => '20',
+        'order' => 2,
+    ]);
+
+    $component = Volt::test('shoppinglist', [ 'list' => $shoppingList ])
+        ->call('updateListOrder', [
+            ['id' => $listItem2->id, 'order' => 1],
+            ['id' => $listItem1->id, 'order' => 2],
+        ]);
+
+    $component
+        ->assertHasNoErrors()
+        ->assertNoRedirect();
+
+    $this->assertDatabaseHas('list_items', [
+        'id' => $listItem1->id,
+        'order' => 2,
+    ]);
+
+    $this->assertDatabaseHas('list_items', [
+        'id' => $listItem2->id,
+        'order' => 1,
+    ]);
+});
