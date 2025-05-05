@@ -114,12 +114,10 @@ $ php artisan make:controller ShoppingListController --resource
 #### (Story 3) Remove Item from List
 
 -   Updated ShoppingList component with remove functionality
--   TODO: Add confirmation check?
 
 #### (Story 4) Cross Item off List
 
 -   Updated ShoppingList component with ability to change item 'is_active' flag, and to display that in the list
--   TODO: Fix button placements
 
 #### (Story 5) Persist List
 
@@ -146,7 +144,6 @@ $ php artisan migrate
 -   Added 'sortedItems' method to ListItem model to specify the correct order precedence for loading of a list's items
 -   Wrote the function for updating the list items once the order has been updated
 -   Added better styling to make the dragged element clearer
--   TODO: Make this visually cleaner
 
 #### (Story 7) Total Prices
 
@@ -162,7 +159,9 @@ $ php artisan migrate
 -   Validate price using a mix of HTML5 input validation & Laravels form validation rules
 -   Assumption: total price should include all items, active and inactive
 
-UI + Tests
-Validation + errors for all current fields
-Fix Lists/List UI
-Tests for all Volt components
+#### Pit-stop for UX, UI & Accessibility Improvements
+
+-   Improved the UI for the ShoppingList component, interface was cluttered with elements too close together
+-   Added better labels + aria-labels to all interactive elements
+-   Improved 'drag & drop' UI icon, added border around element to better signal 'drag-ability'
+-   Added 'are you sure?' confirmation to item-remove button
