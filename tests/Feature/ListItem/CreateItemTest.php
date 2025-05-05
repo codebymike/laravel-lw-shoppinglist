@@ -128,8 +128,8 @@ test('ListItems can be re-ordered', function () {
 
     $component = Volt::test('shoppinglist', [ 'list' => $shoppingList ])
         ->call('updateListOrder', [
-            ['id' => $listItem2->id, 'order' => 1],
-            ['id' => $listItem1->id, 'order' => 2],
+            ['value' => $listItem2->id, 'order' => 1],
+            ['value' => $listItem1->id, 'order' => 2],
         ]);
 
     $component
