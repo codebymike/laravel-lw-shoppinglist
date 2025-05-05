@@ -31,7 +31,7 @@ $addListItem = function () {
     $this->item_price = '';
 };
 
-$remove = function ( ListItem $item ) {
+$removeListItem = function ( ListItem $item ) {
     $item->delete();
     session()->flash('message', 'Item removed from list.');
 };
@@ -88,7 +88,7 @@ $updateListOrder = function ( array $items ) {
                     </div>
                 </div>
                 
-                <button class=""  wire:click="remove({{ $item->id }})">❌</button>
+                <button class="" wire:click="removeListItem({{ $item->id }})">❌</button>
             </div>
         @endforeach
     </div>

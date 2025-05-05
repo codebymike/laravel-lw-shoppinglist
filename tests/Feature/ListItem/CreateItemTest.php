@@ -50,3 +50,29 @@ test('ListItem is listed in the shopping list', function () {
         ->assertSee($listItem->title)
         ->assertSee($listItem->price);
 });
+
+test('ListItem can be deleted', function () {
+    $this->actingAs($user = User::factory()->create());
+
+    // Create a new shopping list first
+    $shoppingList = ShoppingList::factory()->create([
+        'user_id' => $user->id,
+    ]);
+
+    // Create a new list item
+    $listItem = $shoppingList->items()->create([
+        'title' => 'My List Item',
+        'price' => '10',
+    ]);
+
+    $component = Volt::test('shoppinglist', [ 'list' => $shoppingList ])
+        ->call('removeListItem', $listItem->id);
+
+    $component
+        ->assertHasNoErrors()
+        ->assertNoRedirect();
+
+    $this->assertDatabaseMissing('list_items', [
+        'id' => $listItem->id,
+    ]);
+});
