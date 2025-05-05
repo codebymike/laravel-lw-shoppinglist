@@ -87,7 +87,7 @@ $updateListOrder = function ( array $items ) {
                     </div>
                 </div>
                 
-                <button class="" wire:click="removeListItem({{ $item->id }})" aria-label="Remove Item from List">❌</button>
+                <button class="" wire:click="removeListItem({{ $item->id }})" wire:confirm="Confirm delete item?" aria-label="Remove Item from List">❌</button>
             </div>
         @endforeach
     </div>
