@@ -68,24 +68,26 @@ $updateListOrder = function ( array $items ) {
         @foreach($list->sortedItems()->get() as $item)
             <div class="flex justify-between items-center border rounded-md border-gray-300 p-2 mb-1" wire:sortable.item="{{ $item->id }}">
 
-                <div class="draggable" wire:sortable.handle>
+                <div class="cursor-pointer" wire:sortable.handle>
                     <span class="cursor-move">☰</span>
                 </div>
 
-                <button wire:click="toggleActive({{ $item->id }})">
+                <button wire:click="toggleActive({{ $item->id }})" class="">
                     {{ $item->is_active ? '⬜️' : '✅' }}
                 </button>
 
-                <div class="text-lg {{ !$item->is_active ? 'line-through' : '' }} flex gap-5 border-opacity-50 cursor-pointer">
-                    <div>
-                        {{ $item->title }}
-                    </div>
-                    <div>
-                        £{{ $item->price }}
+                <div class="text-lg w-[13rem] {{ !$item->is_active ? 'line-through' : '' }}">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            {{ $item->title }}
+                        </div>
+                        <div>
+                            £{{ $item->price }}
+                        </div>
                     </div>
                 </div>
                 
-                <button wire:click="remove({{ $item->id }})">❌</button>
+                <button class=""  wire:click="remove({{ $item->id }})">❌</button>
             </div>
         @endforeach
     </div>
