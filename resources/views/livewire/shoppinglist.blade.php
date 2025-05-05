@@ -12,7 +12,6 @@ $total = computed(function () {
 });
 
 $addListItem = function () {
-
     // laraval validation for prices is tricky, so doing it manually feels safer
     if (empty($this->item_price) || intval($this->item_price) < 0 || intval($this->item_price) >= PHP_INT_MAX) {
         $this->item_price = "0.00";
@@ -69,7 +68,7 @@ $updateListOrder = function ( array $items ) {
         @foreach($list->sortedItems()->get() as $item)
             <div class="flex justify-between items-center border rounded-md border-gray-300 p-2 mb-1" wire:sortable.item="{{ $item->id }}">
 
-                <div class="cursor-pointer" wire:sortable.handle aria-label="Drag Item">
+                <div class="cursor-pointer" wire:sortable.handle aria-label="Drag Item to Reorder">
                     <span class="cursor-move">☰</span>
                 </div>
 
