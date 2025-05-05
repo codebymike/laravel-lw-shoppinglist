@@ -2,18 +2,18 @@
 
 use function Livewire\Volt\{state, with};
 
-state(['list']);
+state(['list_title']);
 
 with([
     'lists' => fn() => auth()->user()->shoppingLists()->get(),
 ]);
 
-$add = function () {
+$addShoppingList = function () {
     $this->validate([
-        'list' => 'required|string|max:255',
+        'list_title' => 'required|string|max:255',
     ]);
     auth()->user()->shoppingLists()->create([
-        'title' => $this->list
+        'title' => $this->list_title
     ]);
     $this->list = '';
 };
@@ -26,8 +26,8 @@ $add = function () {
     <p class="mb-4">Create and manage your shopping lists.</p>
 
     <div class="mb-4 justify-center items-center ">
-        <form wire:submit="add">
-            <input type="text" wire:model="list" placeholder="Shopping List Name" class="border border-gray-300 rounded-md p-2 text-slate-700">
+        <form wire:submit="addShoppingList">
+            <input type="text" wire:model="list_title" placeholder="Shopping List Name" class="border border-gray-300 rounded-md p-2 text-slate-700">
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Create New List</button>
             <div>
                 @error('list') <span class="block text-red-700 bg-pink-200 text-center">{{ $message }}</span> @enderror 
