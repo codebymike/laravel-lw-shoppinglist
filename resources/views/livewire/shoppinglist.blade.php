@@ -7,8 +7,8 @@ use function Livewire\Volt\{state, computed};
 state(['list','item_title','item_price']);
 
 $total = computed(function () {
-    // return $this->list->items()->where('is_active', true)->sum('price');
-    return $this->list->items()->sum('price');
+    $total_price = $this->list->items()->sum('price');
+    return number_format($total_price, 2);
 });
 
 $addListItem = function () {

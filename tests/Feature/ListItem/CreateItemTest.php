@@ -146,3 +146,28 @@ test('ListItems can be re-ordered', function () {
         'order' => 1,
     ]);
 });
+
+test('ShoppingList will calculate items total price', function () {
+    $this->actingAs($user = User::factory()->create());
+
+    // Create a new shopping list first
+    $shoppingList = ShoppingList::factory()->create([
+        'user_id' => $user->id,
+    ]);
+
+    // Create new list items
+    $listItem1 = $shoppingList->items()->create([
+        'title' => 'Item 1',
+        'price' => '10.10',
+    ]);
+
+    $listItem2 = $shoppingList->items()->create([
+        'title' => 'Item 2',
+        'price' => '20.20',
+    ]);
+
+    $component = Volt::test('shoppinglist', [ 'list' => $shoppingList ]);
+
+    $component
+        ->assertSee('Shopping List Total: £30.30');
+});
