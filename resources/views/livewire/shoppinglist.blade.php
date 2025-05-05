@@ -2,13 +2,9 @@
 
 use App\Models\ListItem;
 use App\Models\ShoppingList;
-use function Livewire\Volt\{state, computed, mount};
+use function Livewire\Volt\{state, computed};
 
 state(['list','item_title','item_price']);
-
-mount(function ($list_id) {
-    $this->list = ShoppingList::findOrFail($list_id);
-});
 
 $total = computed(function () {
     // return $this->list->items()->where('is_active', true)->sum('price');

@@ -14,8 +14,7 @@ test('ListItem can be created', function () {
         'user_id' => $user->id,
     ]);
 
-    $component = Volt::test('shoppinglist')
-        ->assertSet('list_id', $shoppingList->id)
+    $component = Volt::test('shoppinglist',[ 'list' => $shoppingList ])
         ->set('item_title', 'My List Item')
         ->set('item_price', '10.00')
         ->call('addListItem');
@@ -27,6 +26,6 @@ test('ListItem can be created', function () {
     $this->assertDatabaseHas('list_items', [
         'title' => 'My List Item',
         'price' => '10.00',
-        'user_id' => $user->id,
+        'shopping_list_id' => $shoppingList->id,
     ]);
 });
