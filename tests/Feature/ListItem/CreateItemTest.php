@@ -15,7 +15,7 @@ test('ListItem can be created', function () {
     ]);
 
     $component = Volt::test('shoppinglist')
-        ->set('list_id', $shoppingList->id)
+        ->assertSet('list_id', $shoppingList->id)
         ->set('item_title', 'My List Item')
         ->set('item_price', '10.00')
         ->call('addListItem');
