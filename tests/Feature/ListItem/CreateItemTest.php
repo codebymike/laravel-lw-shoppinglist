@@ -76,3 +76,31 @@ test('ListItem can be deleted', function () {
         'id' => $listItem->id,
     ]);
 });
+
+test('ListItem can be marked as completed or in-active', function () {
+    $this->actingAs($user = User::factory()->create());
+
+    // Create a new shopping list first
+    $shoppingList = ShoppingList::factory()->create([
+        'user_id' => $user->id,
+    ]);
+
+    // Create a new list item
+    $listItem = $shoppingList->items()->create([
+        'title' => 'My List Item',
+        'price' => '10',
+        'is_active' => 1,
+    ]);
+
+    $component = Volt::test('shoppinglist', [ 'list' => $shoppingList ])
+        ->call('toggleActive', $listItem);
+
+    $component
+        ->assertHasNoErrors()
+        ->assertNoRedirect();
+
+    $this->assertDatabaseHas('list_items', [
+        'id' => $listItem->id,
+        'is_active' => 0,
+    ]);
+});
