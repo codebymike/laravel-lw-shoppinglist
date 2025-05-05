@@ -46,8 +46,6 @@ $addShoppingList = function () {
                         View List
                     </a>
                 </div>
-                    
-                </span>
             </div>
         @endforeach
     </div>
