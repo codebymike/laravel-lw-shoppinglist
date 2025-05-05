@@ -1,33 +1,38 @@
 <?php
 
 use App\Models\ListItem;
-use function Livewire\Volt\{state, computed};
+use App\Models\ShoppingList;
+use function Livewire\Volt\{state, computed, mount};
 
-state(['list','item','price']);
+state(['list','item_title','item_price']);
+
+mount(function ($list_id) {
+    $this->list = ShoppingList::findOrFail($list_id);
+});
 
 $total = computed(function () {
     // return $this->list->items()->where('is_active', true)->sum('price');
     return $this->list->items()->sum('price');
 });
 
-$add = function () {
+$addListItem = function () {
 
     // laraval validation for prices is tricky, so doing it manually feels safer
-    if (empty($this->price) || intval($this->price) < 0 || intval($this->price) >= PHP_INT_MAX) {
-        $this->price = "0.00";
+    if (empty($this->item_price) || intval($this->item_price) < 0 || intval($this->item_price) >= PHP_INT_MAX) {
+        $this->item_price = "0.00";
     }
 
     $this->validate([
-        'item' => 'required|string|max:255',
+        'item_title' => 'required|string|max:255',
     ]);
 
     $this->list->items()->create([
-        'title' => $this->item,
-        'price' => $this->price,
+        'title' => $this->item_title,
+        'price' => $this->item_price,
     ]);
 
-    $this->item = '';
-    $this->price = '';
+    $this->item_title = '';
+    $this->item_price = '';
 };
 
 $remove = function ( ListItem $item ) {
@@ -54,13 +59,13 @@ $updateListOrder = function ( array $items ) {
     <p class="mb-4">Manage your shopping list. Drag item to re-order</p>
 
     <div class="mb-4 justify-center items-center ">
-        <form wire:submit="add">
-            <input wire:model="item" type="text" placeholder="Item Name" class="border border-gray-300 rounded-md p-2 text-slate-700">
-            <input wire:model="price" type="number" step="any" placeholder="Item Price" class="border border-gray-300 rounded-md p-2 text-slate-700">
+        <form wire:submit="addListItem">
+            <input wire:model="item_title" type="text" placeholder="Item Name" class="border border-gray-300 rounded-md p-2 text-slate-700">
+            <input wire:model="item_price" type="number" step="any" placeholder="Item Price" class="border border-gray-300 rounded-md p-2 text-slate-700">
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Add Item</button>
             <div>
-                @error('item') <span class="block text-red-700 bg-pink-200 text-center">{{ $message }}</span> @enderror 
-                @error('price') <span class="block text-red-700 bg-pink-200 text-center">{{ $message }}</span> @enderror 
+                @error('item_title') <span class="block text-red-700 bg-pink-200 text-center">{{ $message }}</span> @enderror 
+                @error('item_price') <span class="block text-red-700 bg-pink-200 text-center">{{ $message }}</span> @enderror 
             </div>
         </form>
     </div>
