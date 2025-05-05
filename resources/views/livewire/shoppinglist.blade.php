@@ -66,13 +66,17 @@ $updateListOrder = function ( array $items ) {
     </div>
     <div wire:sortable="updateListOrder">
         @foreach($list->sortedItems()->get() as $item)
-            <div class="flex justify-between items-center border-b border-gray-300 py-2" wire:sortable.item="{{ $item->id }}">
+            <div class="flex justify-between items-center border rounded-md border-gray-300 p-2 mb-1" wire:sortable.item="{{ $item->id }}">
+
+                <div class="draggable" wire:sortable.handle>
+                    <span class="cursor-move">☰</span>
+                </div>
 
                 <button wire:click="toggleActive({{ $item->id }})">
                     {{ $item->is_active ? '⬜️' : '✅' }}
                 </button>
 
-                <div class="text-lg {{ !$item->is_active ? 'line-through' : '' }} flex gap-5 border-opacity-50 cursor-pointer" wire:sortable.handle>
+                <div class="text-lg {{ !$item->is_active ? 'line-through' : '' }} flex gap-5 border-opacity-50 cursor-pointer">
                     <div>
                         {{ $item->title }}
                     </div>
@@ -90,7 +94,7 @@ $updateListOrder = function ( array $items ) {
     </div>
     <style type="text/css">
         .draggable-source--is-dragging{
-            background-color: #999;
+            background-color: lightgreen;
             opacity: 0.9;
         }
         .draggable-mirror{
