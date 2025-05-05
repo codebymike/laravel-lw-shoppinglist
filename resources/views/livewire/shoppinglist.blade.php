@@ -66,17 +66,17 @@ $updateListOrder = function ( array $items ) {
     </div>
     <div wire:sortable="updateListOrder">
         @foreach($list->sortedItems()->get() as $item)
-            <div class="flex justify-between items-center border rounded-md border-gray-300 p-2 mb-1" wire:sortable.item="{{ $item->id }}">
+            <div class="flex justify-between items-center border rounded-md border-gray-300 p-2 mb-1  {{ !$item->is_active ? 'bg-black opacity-20' : '' }}" wire:sortable.item="{{ $item->id }}">
 
                 <div class="cursor-pointer" wire:sortable.handle aria-label="Drag Item to Reorder">
                     <span class="cursor-move">☰</span>
                 </div>
 
                 <button wire:click="toggleActive({{ $item->id }})" class="" aria-label="Toggle Item Checked">
-                    {{ $item->is_active ? '✅' : '⬜️' }}
+                    {{ $item->is_active ? '⬜️' : '✅' }}
                 </button>
 
-                <div class="text-lg w-[13rem] {{ !$item->is_active ? 'line-through' : '' }}">
+                <div class="text-lg w-[13rem]">
                     <div class="flex justify-between items-center">
                         <div>
                             {{ $item->title }}
