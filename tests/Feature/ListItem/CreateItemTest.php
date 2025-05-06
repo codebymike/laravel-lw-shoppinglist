@@ -171,3 +171,44 @@ test('ShoppingList will calculate items total price', function () {
     $component
         ->assertSee('Shopping List Total: £30.30');
 });
+
+test('ShoppingList can have price limit', function () {
+    $this->actingAs($user = User::factory()->create());
+
+    // Create a new shopping list first
+    $shoppingList = ShoppingList::factory()->create([
+        'user_id' => $user->id,
+        'price_limit' => 50.00,
+    ]);
+
+    $component = Volt::test('shopping_list.edit', [ 'list' => $shoppingList ]);
+
+    $component
+        ->assertSet('price_limit', 50.00);
+});
+
+test('ShoppingList alerts customer when over the limit', function () {
+    $this->actingAs($user = User::factory()->create());
+
+    // Create a new shopping list first
+    $shoppingList = ShoppingList::factory()->create([
+        'user_id' => $user->id,
+        'price_limit' => 15.00,
+    ]);
+
+    // Create new list items
+    $listItem1 = $shoppingList->items()->create([
+        'title' => 'Item 1',
+        'price' => '10.10',
+    ]);
+
+    $listItem2 = $shoppingList->items()->create([
+        'title' => 'Item 2',
+        'price' => '20.20',
+    ]);
+
+    $component = Volt::test('shopping_list.edit', [ 'list' => $shoppingList ]);
+
+    $component
+        ->assertSee('- Over Limit!');
+});

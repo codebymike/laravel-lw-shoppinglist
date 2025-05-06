@@ -20,7 +20,6 @@ $over_limit = computed(function () {
 });
 
 $addListItem = function () {
-
     // allow blank price, but default to 0.00
     if (empty($this->item_price)) {
         $this->item_price = "0.00";
@@ -115,7 +114,7 @@ $updatePriceLimit = function () {
     </div>
 
     <div class="flex justify-center items-center border-b border-gray-300 py-2 my-2 font-bold {{ $this->over_limit ? 'bg-red-400' : 'bg-green-500' }}">
-        Shopping List Total: &pound;{{ $this->total }} 
+        Shopping List Total: £{{ $this->total }} 
         @if($this->over_limit)
             <span class="text-red-700 pl-2"> - Over Limit!</span>
         @endif

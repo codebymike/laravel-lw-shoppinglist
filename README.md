@@ -179,7 +179,11 @@ $ php artisan migrate
 
 ### Final Thoughts + Notes
 
--   Feels like there's a better way to use LiveWire/Volt, probably utilising full page components.
--   If I had more time I would break down the main ShoppingList component in to more subcomponents, attemping to broke the drag functionality.
--   The final UI for the ShoppingList component could definitely be made more accessible, with clearer labeling, better descriptions and aria-attributing.
+-   Don't feel like I used LiveWire/Volt in the best way, probably better when utilising full page components.
+-   The final UI for the ShoppingList component could definitely be made more accessible, with clearer labeling, descriptions and aria-attributing.
 -   In the Challenge PDF there is a duplicatation error in story#8
+-   If I had more time:
+    -   Implement Story 9. Estimate would have taken approx 1 more hour, incl: 'public' shopping list view, laravel emails+commands, templates & testing
+    -   I would break down the main ShoppingList component in to more subcomponents (initial attempts broke drag-UI functionality).
+    -   Add more tests to cover errors, input-boundaries.
+    -   Better accessibility options: graceful no-javascript fallbacks, better error messaging, clearer UI etc.
