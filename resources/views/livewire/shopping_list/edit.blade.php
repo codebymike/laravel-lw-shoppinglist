@@ -2,13 +2,21 @@
 
 use App\Models\ListItem;
 use App\Models\ShoppingList;
-use function Livewire\Volt\{state, computed};
+use function Livewire\Volt\{state, computed, mount};
 
-state(['list','item_title','item_price']);
+state(['list','item_title','item_price','price_limit']);
+
+mount(function () {
+    $this->price_limit = $this->list->price_limit;
+});
 
 $total = computed(function () {
     $total_price = $this->list->items()->sum('price');
     return number_format($total_price, 2);
+});
+
+$over_limit = computed(function () {
+    return $this->price_limit > 0 && $this->total > $this->price_limit;
 });
 
 $addListItem = function () {
@@ -44,6 +52,15 @@ $updateListOrder = function ( array $items ) {
     foreach ($items as $item) {
         ListItem::whereId($item['value'])->update(['order' => $item['order']]);
     }
+};
+
+$updatePriceLimit = function () {
+    $this->validate([
+        'price_limit' => 'required|numeric|min:0|max:999999.99',
+    ]);
+
+    $this->list->price_limit = $this->price_limit;
+    $this->list->save();
 };
 
 ?>
@@ -82,7 +99,7 @@ $updateListOrder = function ( array $items ) {
                             {{ $item->title }}
                         </div>
                         <div>
-                            £{{ $item->price }}
+                            &pound;{{ $item->price }}
                         </div>
                     </div>
                 </div>
@@ -91,9 +108,27 @@ $updateListOrder = function ( array $items ) {
             </div>
         @endforeach
     </div>
-    <div class="flex justify-center items-center border-b border-gray-300 py-2 font-bold">
-        Shopping List Total: £{{ $this->total }}
+
+    <div class="flex justify-center items-center border-b border-gray-300 py-2 my-2 font-bold {{ $this->over_limit ? 'bg-red-400' : 'bg-green-500' }}">
+        Shopping List Total: &pound;{{ $this->total }} 
+        @if($this->over_limit)
+            <span class="text-red-700 pl-2"> - Over Limit!</span>
+        @endif
     </div>
+
+    <div class="flex justify-center items-center border-b border-gray-300 py-2 font-bold">
+        <div class="w-full text-center">
+            <form wire:submit="updatePriceLimit">
+                <label for="price_limit">Price Limit: &pound;</label>
+                <input id="price_limit" wire:model="price_limit" type="number" step="any" placeholder="Price Limit" class="border border-gray-300 rounded-md p-2 text-slate-700" aria-label="List Price Limit" />
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit" aria-label="Update Price Limit">Update Limit</button>
+                <div>
+                    @error('price_limit') <span class="block text-red-700 bg-pink-200 text-center">{{ $message }}</span> @enderror 
+                </div>
+            </form>
+        </div>
+    </div>
+
     <style type="text/css">
         .draggable-source--is-dragging{
             background-color: lightgreen;
