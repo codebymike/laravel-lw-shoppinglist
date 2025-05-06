@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('list_items', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\ShoppingList::class)->constrained()->cascadeOnDelete();
-            $table->string('quantity')->default('1')->nullable();
             $table->string('title');
             $table->boolean('is_active')->default(true);
             $table->timestamps();

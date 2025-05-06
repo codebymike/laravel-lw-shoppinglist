@@ -15,9 +15,32 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        $shoppingList = $user->shoppingLists()->create([
+            'title' => 'Weekly Shop',
+            'is_active' => true,
+            'price_limit' => 25.00,
+        ]);
+
+        $shoppingList->items()->create([
+            'title' => 'Milk',
+            'price' => 1.50,
+        ],[
+            'title' => 'Eggs',
+            'price' => 3.00,
+        ],[
+            'title' => 'Beans',
+            'price' => 4.50,
+        ],[
+            'title' => 'Celery',
+            'price' => 1.25,
+        ],[
+            'title' => 'Biscuits',
+            'price' => 3.49,
+        ]);   
     }
 }
