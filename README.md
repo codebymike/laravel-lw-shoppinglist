@@ -4,7 +4,7 @@
 
 ### Task
 
-As a healthcare company we have a keen eye on healthy eating and it’s been suggested by an employee that we have an easy way to keep track of what we need, what needs to be purchased and keep spending within the budget constraints. Below, are a number of stories which will achieve this objective.
+As a healthcare company we have a keen eye on healthy eating and it’s been suggested by an employee that we have an easy way to keep track of what we need, what needs to be purchased and keep spending within the budget constraints. Below are a number of stories which will achieve this objective.
 
 ### Rules
 
@@ -37,7 +37,7 @@ Goal of this section is to outline my thought process and justify any decisions 
 -   Don't want to over-engineer, focus on simplicity and code cleanliness.
 -   Few options for technologies. Decided upon Laravel for backend (M+C), and Livewire for frontend (V). Primarily due to experience and knowledge that Laravel would deliver what was required easily. Less experienced with Livewire, but after reading documentation and its close-integration with Laravel, felt like a natural fit and an excuse to learn something a little newer.
 -   Considered options, decided upon using SQLite for DB. Light-weight, simple, scalable. Perfect for a project of this size.
--   Following the Zero one infinity (ZOI) rule, and making some assumptions, a user is going to want more than one list at once. So I'm going start with the ability to model 'user -> many lists -> many items'.
+-   Following the Zero one infinity (ZOI) rule, and making some assumptions, a user is going to want more than one list at once. So I'm going start with the relationship model 'user -> many lists -> many items'.
 -   In the interest of being data-driven, designed the core data-models first:
 
 #### Data Models
@@ -89,7 +89,7 @@ $ php artisan db:seed
 ```
 
 -   This will seed you a test user profile (test@example.com / password)
--   Considered pausing here to make model factories & seeders, decided to revist later once ready for more comprehensive testing
+-   Considered pausing here to make model factories & seeders, decided to revisit later once ready for more comprehensive testing
 
 #### First Frontend component (using Livewire / Volt)
 
@@ -98,7 +98,7 @@ $ php artisan make:volt
 ```
 
 -   Created component functionality for adding a shopping list, tying it to the user - then listing out their shopping lists
--   Going to use basic routing for simplity
+-   Going to use basic routing for simplicity
 
 ```
 $ php artisan make:controller ShoppingListController --resource
@@ -133,7 +133,7 @@ $ php artisan make:controller ShoppingListController --resource
 -   Created a migration to add 'order' integer field to the ListItem model
 -   Make decision to handle item sorting by: defaulting each item's 'order' to 0, an 'unsorted' list will then default to being rendered in 'created_by' order
     -   When a user action is taken to sort a list, only then will each item on that list be given the new order - which will be updated on each subsequence re-order
-    -   This will avoid uncessary order increament calculations when adding a new item to a list
+    -   This will avoid unnecessary order increment calculations when adding a new item to a list
     -   Assumption: adding an item to a list will occur more frequently than ordering a list.
 
 ```
@@ -170,20 +170,22 @@ $ php artisan migrate
 #### (Story 8) Spending Limit + Alert
 
 -   The 'limit' value should live on the ShoppingList model and either be nullable, or ignored if the value is 0. The UI for the Spending Limit feels more useful on the ItemsList page
--   There are number of ways exceeding this limit could be communicated to the user, going to keep it simple and use colours.
+-   There are numerous ways exceeding this limit could be communicated to the user, going to keep it simple and use colours.
 
 ```
 $ php artisan make:migration add_limit_shopping_lists_table
 $ php artisan migrate
 ```
 
+-   Added Limit to the component state, added the updatePriceLimit functionality and UI flags for displaying the colour-based (green/red) feedback.
+
 ### Final Thoughts + Notes
 
--   Don't feel like I used LiveWire/Volt in the best way, probably better when utilising full page components.
+-   Don't feel like I used LiveWire/Volt in the optimal way, probably better when utilising full page components w/ routing.
 -   The final UI for the ShoppingList component could definitely be made more accessible, with clearer labeling, descriptions and aria-attributing.
--   In the Challenge PDF there is a duplicatation error in story#8
+-   In the Challenge PDF there is a duplication error in story#8
 -   If I had more time:
     -   Implement Story 9. Estimate would have taken approx 1 more hour, incl: 'public' shopping list view, laravel emails+commands, templates & testing
-    -   I would break down the main ShoppingList component in to more subcomponents (initial attempts broke drag-UI functionality).
+    -   I would break down the main ShoppingList component to smaller subcomponents (initial attempts broke drag-UI functionality).
     -   Add more tests to cover errors, input-boundaries.
     -   Better accessibility options: graceful no-javascript fallbacks, better error messaging, clearer UI etc.
