@@ -29,16 +29,24 @@ class DatabaseSeeder extends Seeder
         $shoppingList->items()->create([
             'title' => 'Milk',
             'price' => 1.50,
-        ],[
-            'title' => 'Eggs',
-            'price' => 3.00,
-        ],[
-            'title' => 'Beans',
-            'price' => 4.50,
-        ],[
-            'title' => 'Celery',
-            'price' => 1.25,
-        ],[
+        ]);
+        $shoppingList->items()->create([
+            'title' => 'Bread',
+            'price' => 2.00,
+        ]);
+        $shoppingList->items()->create([
+            'title' => 'Butter',
+            'price' => 1.75,
+        ]);
+        $shoppingList->items()->create([
+            'title' => 'Cheese',
+            'price' => 2.50,
+        ]);
+        $shoppingList->items()->create([
+            'title' => 'Fish',
+            'price' => 4.00,
+        ]);
+        $shoppingList->items()->create([
             'title' => 'Biscuits',
             'price' => 3.49,
         ]);   
