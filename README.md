@@ -165,3 +165,21 @@ $ php artisan migrate
 -   Added better labels + aria-labels to all interactive elements
 -   Improved 'drag & drop' UI icon, added border around element to better signal 'drag-ability'
 -   Added 'are you sure?' confirmation to item-remove button
+-   Improved active/crossed-off ListItem UI
+
+#### (Story 8) Spending Limit + Alert
+
+-   The 'limit' value should live on the ShoppingList model and either be nullable, or ignored if the value is 0. The UI for the Spending Limit feels more useful on the ItemsList page
+-   There are number of ways exceeding this limit could be communicated to the user, going to keep it simple and use colours.
+
+```
+$ php artisan make:migration add_limit_shopping_lists_table
+$ php artisan migrate
+```
+
+### Final Thoughts + Notes
+
+-   Feels like there's a better way to use LiveWire/Volt, probably utilising full page components.
+-   If I had more time I would break down the main ShoppingList component in to more subcomponents, attemping to broke the drag functionality.
+-   The final UI for the ShoppingList component could definitely be made more accessible, with clearer labeling, better descriptions and aria-attributing.
+-   In the Challenge PDF there is a duplicatation error in story#8
