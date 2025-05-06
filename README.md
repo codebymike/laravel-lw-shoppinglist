@@ -183,14 +183,16 @@ $ php artisan migrate
 
 -   Don't feel like I used LiveWire/Volt in the optimal way, probably better when utilising full page components w/ routing.
 -   The final UI for the ShoppingList component could definitely be made more accessible, with clearer labeling, descriptions and aria-attributing.
--   In the Challenge PDF there is a story duplication error in story#8
+-   In the Challenge PDF there is a story duplication error in story#8.
 -   If I had more time:
-    -   Implement Story 9. Estimate would have taken approx 1 more hour, incl: 'public' shopping list view, laravel emails+commands, templates & testing
+    -   Implement Story 9. Estimate would have taken approx 1 more hour, incl: 'public' shopping list view, laravel emails+commands, templates & testing.
     -   I would break down the main ShoppingList component to smaller subcomponents (initial attempts broke drag-UI functionality).
     -   Add more tests to cover errors, input-boundaries.
     -   Better accessibility options: graceful no-javascript fallbacks, better error messaging, clearer UI etc.
+    -   ShoppingList item's title length has no length limit, didn't want to add a short, arbitrary limit or truncation - would rework UI to allow cleaner overflow.
+    -   Slightly better dark/light mode support.
 
-### Instructions
+### Build + Run Instructions
 
 -   Assuming you're running php 8.4x and node 20.x
 
@@ -203,14 +205,14 @@ $ cp .env.example .env
 $ php artisan key:generate
 ```
 
--   Update the .env APP_URL value to what it will be when running locally e.g using Herd http://shoppinglist.test
+-   Update the .env APP_URL value to what it will be when running locally e.g using Herd http://shoppinglist.test .
 
 ```
 $ php artisan migrate
 $ php artisan db:seed
 ```
 
--   Seeding will generate a sample user, shopping list and items. User access details are: test@example.com / password
+-   Seeding will generate a sample user, shopping list and items. User access details are: test@example.com / password.
 -   To run tests:
 
 ```
