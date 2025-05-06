@@ -14,7 +14,7 @@ test('ListItem can be created', function () {
         'user_id' => $user->id,
     ]);
 
-    $component = Volt::test('shoppinglist', [ 'list' => $shoppingList ])
+    $component = Volt::test('shopping_list.edit', [ 'list' => $shoppingList ])
         ->set('item_title', 'My List Item')
         ->set('item_price', '10.00')
         ->call('addListItem');
@@ -44,7 +44,7 @@ test('ListItem is listed in the shopping list', function () {
         'price' => '10',
     ]);
 
-    $component = Volt::test('shoppinglist', [ 'list' => $shoppingList ]);
+    $component = Volt::test('shopping_list.edit', [ 'list' => $shoppingList ]);
 
     $component
         ->assertSee($listItem->title)
@@ -65,7 +65,7 @@ test('ListItem can be deleted', function () {
         'price' => '10',
     ]);
 
-    $component = Volt::test('shoppinglist', [ 'list' => $shoppingList ])
+    $component = Volt::test('shopping_list.edit', [ 'list' => $shoppingList ])
         ->call('removeListItem', $listItem->id);
 
     $component
@@ -92,7 +92,7 @@ test('ListItem can be marked as completed or in-active', function () {
         'is_active' => 1,
     ]);
 
-    $component = Volt::test('shoppinglist', [ 'list' => $shoppingList ])
+    $component = Volt::test('shopping_list.edit', [ 'list' => $shoppingList ])
         ->call('toggleActive', $listItem);
 
     $component
@@ -126,7 +126,7 @@ test('ListItems can be re-ordered', function () {
         'order' => 2,
     ]);
 
-    $component = Volt::test('shoppinglist', [ 'list' => $shoppingList ])
+    $component = Volt::test('shopping_list.edit', [ 'list' => $shoppingList ])
         ->call('updateListOrder', [
             ['value' => $listItem2->id, 'order' => 1],
             ['value' => $listItem1->id, 'order' => 2],
@@ -166,7 +166,7 @@ test('ShoppingList will calculate items total price', function () {
         'price' => '20.20',
     ]);
 
-    $component = Volt::test('shoppinglist', [ 'list' => $shoppingList ]);
+    $component = Volt::test('shopping_list.edit', [ 'list' => $shoppingList ]);
 
     $component
         ->assertSee('Shopping List Total: £30.30');
