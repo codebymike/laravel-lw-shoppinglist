@@ -20,13 +20,18 @@ $over_limit = computed(function () {
 });
 
 $addListItem = function () {
-    // laraval validation for prices is tricky, so doing it manually feels safer
-    if (empty($this->item_price) || intval($this->item_price) < 0 || intval($this->item_price) >= PHP_INT_MAX) {
+
+    // allow blank price, but default to 0.00
+    if (empty($this->item_price)) {
         $this->item_price = "0.00";
+    } else {
+        // enforce 2 decimal places
+        $this->item_price = number_format((float)$this->item_price, 2, '.', '');
     }
 
     $this->validate([
         'item_title' => 'required|string|max:255',
+        'item_price' => 'required|numeric|min:0|max:999999.99',
     ]);
 
     $this->list->items()->create([
