@@ -183,9 +183,36 @@ $ php artisan migrate
 
 -   Don't feel like I used LiveWire/Volt in the optimal way, probably better when utilising full page components w/ routing.
 -   The final UI for the ShoppingList component could definitely be made more accessible, with clearer labeling, descriptions and aria-attributing.
--   In the Challenge PDF there is a duplication error in story#8
+-   In the Challenge PDF there is a story duplication error in story#8
 -   If I had more time:
     -   Implement Story 9. Estimate would have taken approx 1 more hour, incl: 'public' shopping list view, laravel emails+commands, templates & testing
     -   I would break down the main ShoppingList component to smaller subcomponents (initial attempts broke drag-UI functionality).
     -   Add more tests to cover errors, input-boundaries.
     -   Better accessibility options: graceful no-javascript fallbacks, better error messaging, clearer UI etc.
+
+### Instructions
+
+-   Assuming you're running php 8.4x and node 20.x
+
+```
+$ git clone https://github.com/codebymike/laravel-lw-shoppinglist.git
+$ cd laravel-lw-shoppinglist/
+$ composer install
+$ npm install
+$ cp .env.example .env
+$ php artisan key:generate
+```
+
+-   Update the .env APP_URL value to what it will be when running locally e.g using Herd http://shoppinglist.test
+
+```
+$ php artisan migrate
+$ php artisan db:seed
+```
+
+-   Seeding will generate a sample user, shopping list and items. User access details are: test@example.com / password
+-   To run tests:
+
+```
+$ php artisan test
+```
