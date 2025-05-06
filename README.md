@@ -42,25 +42,24 @@ Goal of this section is to outline my thought process and justify any decisions 
 
 #### Data Models
 
-(TODO: turn into an image)
-User
-ID
-(basic ident. & auth params)
+-   User
+    -   ID
+    -   (basic ident. & auth params)
+    -   Has Many ->
+-   ShoppingList
+    -   ID
+    -   UserID (FK)
+    -   title
+    -   is_active
+    -   (timestamps)
+    -   Has Many ->
+-   ListItem
 
-List
-ID
-UserID (FK)
-title
-is_active
-(timestamps)
-
-Item
-ID
-ListID (FK)
-title
-qty
-is_active
-(timestamps)
+    -   ID
+    -   ListID (FK)
+    -   title
+    -   is_active
+    -   (timestamps)
 
 -   These models will be updated later to cater for future stories, but this will accomplish the initial functionality.
 
